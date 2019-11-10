@@ -5,6 +5,12 @@
     "license": "MIT",
     "minimum-stability": "dev",
     "require": {},
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/paxha/db-truncate"
+        }
+    ],
     "extra": {
         "laravel": {
             "providers": [
