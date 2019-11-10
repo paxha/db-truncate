@@ -4,7 +4,9 @@
     "type": "laravel",
     "license": "MIT",
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "paxha/db-truncate": "master"
+    },
     "repositories": [
         {
             "type": "vcs",
