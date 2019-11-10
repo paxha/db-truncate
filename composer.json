@@ -4,15 +4,6 @@
     "type": "laravel",
     "license": "MIT",
     "minimum-stability": "dev",
-    "require": {
-        "paxha/db-truncate": "dev-master"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/paxha/db-truncate"
-        }
-    ],
     "extra": {
         "laravel": {
             "providers": [
