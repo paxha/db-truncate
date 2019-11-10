@@ -16,7 +16,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "paxha\\db-truncate\\DBTruncateServiceProvider"
+                "Paxha\\DBTruncate\\DBTruncateServiceProvider"
             ]
         }
     },
