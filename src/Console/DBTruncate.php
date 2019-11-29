@@ -1,9 +1,10 @@
 <?php
 
-namespace Paxha\DBTruncate\Console;
+namespace DBTruncate\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DBTruncate extends Command
 {
@@ -38,17 +39,14 @@ class DBTruncate extends Command
      */
     public function handle()
     {
-        DB::statement("SET foreign_key_checks=0");
-        $db = "Tables_in_" . DB::connection()->getDatabaseName();
-        $tables = DB::connection()->select('SHOW TABLES');
+        $tables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
         foreach ($tables as $table) {
-            if ($table->{$db} == 'migrations') {
+            if ($table == 'migrations') {
                 continue;
             }
-            $this->comment($table->{$db} . ' table truncating...');
-            DB::table($table->{$db})->truncate();
-            $this->info($table->{$db} . ' table truncate success.');
+            $this->comment($table . ' table truncating...');
+            DB::table($table)->truncate();
+            $this->info($table . ' table truncate success.');
         }
-        DB::statement("SET foreign_key_checks=1");
     }
 }

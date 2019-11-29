@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Paxha\DBTruncate;
+namespace DBTruncate;
 
 
 use Carbon\Laravel\ServiceProvider;
-use Paxha\DBTruncate\Console\DBTruncate;
+use DBTruncate\Console\DBTruncate;
 
 class DBTruncateServiceProvider extends ServiceProvider
 {
