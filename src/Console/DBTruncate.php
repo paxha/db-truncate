@@ -36,9 +36,13 @@ class DBTruncate extends Command
      * Execute the console command.
      *
      * @return mixed
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function handle()
     {
+        $db = app()->make('db');
+        $db->getSchemaBuilder()->disableForeignKeyConstraints();
+
         $tables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
         foreach ($tables as $table) {
             if ($table == 'migrations') {
@@ -48,5 +52,6 @@ class DBTruncate extends Command
             DB::table($table)->truncate();
             $this->info($table . ' table truncate success.');
         }
+        $db->getSchemaBuilder()->enableForeignKeyConstraints();
     }
 }
