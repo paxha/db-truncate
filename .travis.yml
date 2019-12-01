@@ -8,6 +8,11 @@ cache:
     directories:
         - $HOME/.composer/cache/files
 
+env:
+    global:
+        - DB_CONNECTION=sqlite
+        - DB_CONNECTION=":memory:"
+
 php:
     - 7.2
     - 7.3
@@ -16,17 +21,13 @@ php:
 matrix:
     include:
         - php: 7.2
-          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=testing
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql DB_DATABASE=test DB_USERNAME=root DB_PASSWORD=
         - php: 7.2
-          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql DB_DATABASE=test DB_USERNAME=root DB_PASSWORD=""
-        - php: 7.2
-          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=pgsql DB_DATABASE=test DB_USERNAME=root DB_PASSWORD=""
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=pgsql DB_DATABASE=test DB_USERNAME=postgres DB_PASSWORD=
         - php: 7.3
-          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=testing
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql DB_DATABASE=test DB_USERNAME=root DB_PASSWORD=
         - php: 7.3
-          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql DB_DATABASE=test DB_USERNAME=root DB_PASSWORD=""
-        - php: 7.3
-          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=pgsql DB_DATABASE=test DB_USERNAME=root DB_PASSWORD=""
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=pgsql DB_DATABASE=test DB_USERNAME=postgres DB_PASSWORD=
     allow_failures:
         - php: 7.4snapshot
 
