@@ -11,7 +11,7 @@ cache:
 env:
     global:
         - DB_CONNECTION=sqlite
-        - DB_CONNECTION=":memory:"
+        - DB_DATABASE=":memory:"
 
 php:
     - 7.2
