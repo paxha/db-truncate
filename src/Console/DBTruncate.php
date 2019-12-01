@@ -40,9 +40,8 @@ class DBTruncate extends Command
      */
     public function handle()
     {
-        if (env('DB_CONNECTION') != 'sqlite') {
-            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        }
+        $db = app()->make('db');
+        $db->getSchemaBuilder()->disableForeignKeyConstraints();
 
         $tables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
         foreach ($tables as $table) {
@@ -53,8 +52,7 @@ class DBTruncate extends Command
             DB::table($table)->truncate();
             $this->info($table . ' table truncate success.');
         }
-        if (env('DB_CONNECTION') != 'sqlite') {
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        }
+
+        $db->getSchemaBuilder()->enableForeignKeyConstraints();
     }
 }
