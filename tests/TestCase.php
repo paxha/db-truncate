@@ -6,12 +6,9 @@ use DBTruncate\Tests\Models\Post;
 use DBTruncate\Tests\Models\User;
 use Illuminate\Support\Facades\DB;
 use DBTruncate\DBTruncateServiceProvider;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-    use RefreshDatabase;
-
     public function setUp(): void
     {
         parent::setUp();
@@ -26,11 +23,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $this->assertContainsEquals('posts', $tables, 'posts table must be exists');
 
         $this->seeds();
-    }
-
-    protected function useMySqlConnection($app)
-    {
-        $app->config->set('database.default', 'mysql');
     }
 
     protected function getPackageProviders($app)

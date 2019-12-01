@@ -1,5 +1,11 @@
 language: php
 
+services:
+    - mysql
+    - sqlite
+    - pgsql
+    - sqlsrv
+
 cache:
     directories:
         - $HOME/.composer/cache/files
@@ -12,11 +18,29 @@ php:
 matrix:
     include:
         - php: 7.2
-          env: COMPOSER_FLAGS="--prefer-lowest"
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=testing
+        - php: 7.2
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql
+        - php: 7.2
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=sqlite
+        - php: 7.2
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=pgsql
+        - php: 7.2
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=sqlsrv
+        - php: 7.3
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=testing
+        - php: 7.3
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql
+        - php: 7.3
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=sqlite
+        - php: 7.3
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=pgsql
+        - php: 7.3
+          env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=sqlsrv
     allow_failures:
         - php: 7.4snapshot
 
-before_script:
+install:
     - travis_retry composer self-update
     - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction
 
