@@ -8,6 +8,9 @@ use DBTruncate\Tests\TestCase;
 
 class CommandTest extends TestCase
 {
+    /**
+     * @environment-setup useMySqlConnection
+     */
     public function testDBTruncateCommand()
     {
         $this->artisan('db:truncate');

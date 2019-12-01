@@ -28,6 +28,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $this->seeds();
     }
 
+    protected function useMySqlConnection($app)
+    {
+        $app->config->set('database.default', 'mysql');
+    }
+
     protected function getPackageProviders($app)
     {
         return [
