@@ -40,8 +40,8 @@ class DBTruncate extends Command
      */
     public function handle()
     {
-//        $db = app()->make('db');
-//        $db->getSchemaBuilder()->disableForeignKeyConstraints();
+        $db = app()->make('db');
+        $db->getSchemaBuilder()->disableForeignKeyConstraints();
 
         $tables = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
         foreach ($tables as $table) {
@@ -52,6 +52,7 @@ class DBTruncate extends Command
             DB::table($table)->truncate();
             $this->info($table . ' table truncate success.');
         }
-//        $db->getSchemaBuilder()->enableForeignKeyConstraints();
+
+        $db->getSchemaBuilder()->enableForeignKeyConstraints();
     }
 }
